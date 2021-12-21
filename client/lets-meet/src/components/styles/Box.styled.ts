@@ -4,6 +4,7 @@ type displayProps = 'block' | 'inline' | 'inline-block' | 'flex';
 type directionProps = 'column' | 'row' | 'row-reverse' | 'row-reverse';
 type JustifyContentProps = 'flex-start' | 'flex-end' | 'space-around' | 'center' | 'space-between';
 type alignItemsProps = 'flex-start' | 'flex-end' | 'space-around' | 'center' | 'space-between' | 'stretch';
+type shadowProps = 'sm' | 'md' | 'lg' | 'outlined';
 
 interface BoxProps{
     p?: number;
@@ -29,6 +30,10 @@ interface BoxProps{
     direction?: directionProps;
     justifyContent?: JustifyContentProps;
     alignItems?: alignItemsProps;
+    gap?: string;
+
+    shadow?: shadowProps;
+    radius?: string;
 }
 const baseValue = 8;
 
@@ -54,11 +59,20 @@ export const Box = styled.div<BoxProps>`
 
     display: ${({display}) => display || 'block'};
 
-    width: ${({width}) => width || '100%'};
+    width: ${({width}) => width || 'auto'};
     height: ${({height}) => height || 'auto'};
     
     ${({direction}) => direction && 'flex-direction: '+direction+';'}
     ${({justifyContent}) => justifyContent && 'justify-content: '+justifyContent+';'}
     ${({alignItems}) => alignItems && 'align-items: '+ alignItems+';'}
+    ${({gap}) => gap && 'gap: '+ gap+';'}
+
+    ${({shadow}) => shadow === 'sm'? 'box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);'
+                    : shadow === 'md' ?'box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);'
+                    : shadow === 'lg' ?'box-shadow: 0 1rem 3rem rgba(0,0,0,.175);'
+                    : shadow === 'outlined'? 'border-radius: 4px; border: 1px solid rgba(0, 0, 0, 0.12);'
+                    : 'box-shadow: none'}
+
+    ${({radius})=> radius && 'border-radius: '+radius+';'}
 
 `;
