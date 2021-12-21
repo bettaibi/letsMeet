@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Container, Box, Typography } from './components/styles';
+import { Container, Box, Typography, Hidden } from './components/styles';
 import { GlobalStyle } from './components/styles/GlobalStyle';
 
 const theme = {
@@ -11,7 +11,13 @@ const theme = {
     info: '#4f46e5',
     muted: '#6c757d'
   },
-  mobile: '768'
+  breakpoints: {
+    xs: '575.98px',
+    sm: '767.98px',
+    md: '991.98px',
+    lg: '1199.98px',
+    xlg: '1399.98px'
+  }
 };
 
 function App() {
@@ -38,6 +44,16 @@ function App() {
           lorem ipsum sd,fndsfsdk sdfkdsf dskfksdf
         </Typography>
       </Box>
+
+     <Box mt={8}>
+        <Hidden breakpoint='gtXs'>
+          <Typography color="primary" as="p">
+            lorem ipsum sd,fndsfsdk sdfkdsf dskfksdf lorem ipsum sd,fndsfsdk sdfkdsf dskfksdf
+            lorem ipsum sd,fndsfsdk sdfkdsf dskfksdf
+            lorem ipsum sd,fndsfsdk sdfkdsf dskfksdf lorem ipsum sd,fndsfsdk sdfkdsf dskfksdf
+        </Typography>
+        </Hidden>
+      </Box> 
       </Container>
     </ThemeProvider>
   );

@@ -5,6 +5,7 @@ type directionProps = 'column' | 'row' | 'row-reverse' | 'row-reverse';
 type JustifyContentProps = 'flex-start' | 'flex-end' | 'space-around' | 'center' | 'space-between';
 type alignItemsProps = 'flex-start' | 'flex-end' | 'space-around' | 'center' | 'space-between' | 'stretch';
 type shadowProps = 'sm' | 'md' | 'lg' | 'outlined';
+type wrapProps = 'wrap' | 'no-wrap';
 
 interface BoxProps{
     p?: number;
@@ -31,6 +32,7 @@ interface BoxProps{
     justifyContent?: JustifyContentProps;
     alignItems?: alignItemsProps;
     gap?: string;
+    wrap?: wrapProps;
 
     shadow?: shadowProps;
     radius?: string;
@@ -66,6 +68,7 @@ export const Box = styled.div<BoxProps>`
     ${({justifyContent}) => justifyContent && 'justify-content: '+justifyContent+';'}
     ${({alignItems}) => alignItems && 'align-items: '+ alignItems+';'}
     ${({gap}) => gap && 'gap: '+ gap+';'}
+    ${({wrap}) => wrap && 'flex-wrap: '+ wrap+';'}
 
     ${({shadow}) => shadow === 'sm'? 'box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);'
                     : shadow === 'md' ?'box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);'

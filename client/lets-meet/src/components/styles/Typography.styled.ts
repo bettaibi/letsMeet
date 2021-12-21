@@ -13,4 +13,5 @@ export const Typography = styled.h1<TypographyProps>`
 
     color: ${({color, theme}) => color? theme.colors[`${color}`]: 'inherit'};
     ${({size}) => size && 'font-size: '+size+';'};
+    
 `;
