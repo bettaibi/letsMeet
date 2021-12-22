@@ -36,6 +36,8 @@ interface BoxProps{
 
     shadow?: shadowProps;
     radius?: string;
+    background?: string;
+    flex?: number | string;
 }
 const baseValue = 8;
 
@@ -69,13 +71,16 @@ export const Box = styled.div<BoxProps>`
     ${({alignItems}) => alignItems && 'align-items: '+ alignItems+';'}
     ${({gap}) => gap && 'gap: '+ gap+';'}
     ${({wrap}) => wrap && 'flex-wrap: '+ wrap+';'}
+    ${({flex}) => flex && 'flex: '+ flex+';'}
 
     ${({shadow}) => shadow === 'sm'? 'box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);'
                     : shadow === 'md' ?'box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);'
                     : shadow === 'lg' ?'box-shadow: 0 1rem 3rem rgba(0,0,0,.175);'
                     : shadow === 'outlined'? 'border-radius: 4px; border: 1px solid rgba(0, 0, 0, 0.12);'
-                    : 'box-shadow: none'}
+                    : 'box-shadow: none;'}
 
     ${({radius})=> radius && 'border-radius: '+radius+';'}
+
+    background-color: ${({background, theme}) => theme.colors[`${background}`]? theme.colors[`${background}`]: background};
 
 `;

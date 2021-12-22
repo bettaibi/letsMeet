@@ -50,5 +50,9 @@ export const GlobalStyle = createGlobalStyle`
         letter-spacing: 1px;
         line-height: 1.5;
     }
+
+    .m-0{
+        margin: 0 !important;
+    }
     
 `;
