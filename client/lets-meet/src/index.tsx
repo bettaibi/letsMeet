@@ -8,9 +8,8 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 const theme = {
   colors: {
     primary: '#202124',
-    secondary: '#dadfe5',
+    secondary: '#fd998f',
     accent: '#f1f5f9',
-    info: '#4f46e5',
     muted: '#6c757d'
   },
   breakpoints: {

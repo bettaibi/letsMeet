@@ -33,11 +33,17 @@ interface BoxProps{
     alignItems?: alignItemsProps;
     gap?: string;
     wrap?: wrapProps;
+    flex?: number | string;
 
     shadow?: shadowProps;
     radius?: string;
     background?: string;
-    flex?: number | string;
+
+    position?: 'fixed' | 'absolute' | 'relative';
+    top?: string;
+    bottom?: string;
+    left?: string;
+    right?: string;
 }
 const baseValue = 8;
 
@@ -83,4 +89,9 @@ export const Box = styled.div<BoxProps>`
 
     background-color: ${({background, theme}) => theme.colors[`${background}`]? theme.colors[`${background}`]: background};
 
+    ${({position})=> position && 'position: '+position+';'}
+    ${({top})=> top && 'top: '+top+';'}
+    ${({bottom})=> bottom && 'bottom: '+bottom+';'}
+    ${({left})=> left && 'left: '+left+';'}
+    ${({right})=> right && 'right: '+right+';'}
 `;

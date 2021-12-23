@@ -3,6 +3,7 @@ import { Box } from './Box.styled';
 import { Typography } from './Typography.styled';
 import { Hidden } from './Hidden.styled';
 import { Button } from './Button.styled';
+import { Modal, Overlay } from './Modal.styled';
 
 export {
     Container,
@@ -10,4 +11,6 @@ export {
     Typography,
     Hidden,
     Button,
+    Modal,
+    Overlay,
 }
