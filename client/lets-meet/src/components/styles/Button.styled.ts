@@ -31,3 +31,13 @@ export const Button = styled.button<ButtonProps>`
         transform: scale(0.98);
     }
 `;
+
+export const SubButtonLeft = styled(Button)`
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+`;
+
+export const SubButtonRight = styled(Button)`
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+`;

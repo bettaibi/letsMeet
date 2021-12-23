@@ -1,19 +1,20 @@
 import React from "react";
 import Header from "../../components/Header";
-import { Box, Container, Typography, Button } from "../../components/styles";
+import { Box, Container, Typography, Button, BasicInput } from "../../components/styles";
+import { SubButtonLeft, SubButtonRight } from "../../components/styles/Button.styled";
 import useModal from "../../hooks/useModal";
-
 
 const Home = () => {
     const { ModalComponent, handleOpen, handleClose } = useModal();
 
     return (
-     
-        <main style={{position: 'relative'}}>
-               <ModalComponent>
+
+        <main style={{ position: 'relative' }}>
+            <ModalComponent>
                 <p>this is a modal text</p>
+                <button onClick={handleClose}>close</button>
             </ModalComponent>
-            <Box background="accent" style={{minHeight: '100vh'}}>
+            <Box background="accent" style={{ minHeight: '100vh' }}>
                 <Container>
                     <Box className="flex-sm-column" py={3} display="flex" direction="row" alignItems="center" justifyContent="space-between">
                         <Box display="flex" gap="0.5rem" direction="row" alignItems="center" justifyContent="space-between">
@@ -37,6 +38,16 @@ const Home = () => {
                                 We re-engineered the service that we built for secure business meetings, Lets Meet makes it free and available for all. <br />
                                 Click on the button below to get a link that you can send to people that you want to meet with.
                             </Typography>
+
+                            <Box display="flex" direction="row" mt={2}>
+                                <SubButtonLeft color="muted" background="#fff">
+                                    Get a link
+                                </SubButtonLeft>
+                                <BasicInput type="text" placeholder="Enter a code link" />
+                                <SubButtonRight color="#fff" background="secondary">
+                                    Join
+                                </SubButtonRight>
+                            </Box>
                         </Box>
                         <Box width="375px" mt={3} className="d-sm-none">
                             <img src="./images/illustration-mockups.svg" width="100%" height="100%" />
@@ -44,19 +55,19 @@ const Home = () => {
                     </Box>
 
                 </Container>
-                
+
             </Box>
             <Box position="absolute" bottom="-20px" width="100%">
-                    <img src="./images/wave.svg" alt="waves" width="100%" />
-                </Box>
+                <img src="./images/wave.svg" alt="waves" width="100%" />
+            </Box>
 
-                <Box position="absolute" right="20px" bottom="20px" >
-                    <Typography as="small" color="muted">
-                        &copy;2021, Created by Nidhal Bettaibi
-                    </Typography>
-                </Box>
+            <Box position="absolute" right="20px" bottom="20px" >
+                <Typography as="small" color="muted">
+                    &copy;2021, Created by Nidhal Bettaibi
+                </Typography>
+            </Box>
         </main>
-     
+
     )
 };
 

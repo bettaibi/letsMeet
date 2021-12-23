@@ -1,11 +1,23 @@
 import { keyframes } from 'styled-components';
 
-export const slideRight = keyframes`
+export const slideInRight = keyframes`
     from{
         transform: translate(100px, 0);
     }
     to{ 
         transform: translate(0, 0);
+    }
+`;
+
+export const slideOutRight = keyframes`
+    0%{
+        transform: translate(0, 0);
+    }
+    99%{
+        transform: translate(-100px, 0);
+    }
+    100%{
+        transform: translate(-100px, 0);
     }
 `;
 

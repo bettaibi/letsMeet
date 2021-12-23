@@ -4,6 +4,7 @@ import { Typography } from './Typography.styled';
 import { Hidden } from './Hidden.styled';
 import { Button } from './Button.styled';
 import { Modal, Overlay } from './Modal.styled';
+import { BasicInput } from './Input.styled';
 
 export {
     Container,
@@ -13,4 +14,5 @@ export {
     Button,
     Modal,
     Overlay,
+    BasicInput,
 }

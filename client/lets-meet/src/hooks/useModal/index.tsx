@@ -7,15 +7,13 @@ const useModal = () => {
 
     const ModalComponent = useCallback(({children}) =>{
         return(
-            <Overlay>
-                 <Modal 
-                
-                >
+            <Overlay show={show} onClick={handleClose}>
+                 <Modal show={show} onClick={e => {e.stopPropagation()}}>
                     {children}
                 </Modal>
             </Overlay>
         )
-    }, []);
+    }, [show]);
 
     return {
         handleOpen,
