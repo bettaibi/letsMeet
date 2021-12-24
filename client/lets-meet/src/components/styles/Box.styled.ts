@@ -44,6 +44,7 @@ interface BoxProps{
     bottom?: string;
     left?: string;
     right?: string;
+    zIndex?: number;
 }
 const baseValue = 8;
 
@@ -94,4 +95,24 @@ export const Box = styled.div<BoxProps>`
     ${({bottom})=> bottom && 'bottom: '+bottom+';'}
     ${({left})=> left && 'left: '+left+';'}
     ${({right})=> right && 'right: '+right+';'}
+    ${({zIndex})=> zIndex && 'z-index: '+zIndex+';'}
+
+
+    /* Media */
+    @media (max-width: 768px) {
+        .flex-sm-column {
+            display: flex;
+            flex-direction: column;
+            gap:1rem;
+        }
+        .flex-sm-row {
+            flex-direction: row;
+        }
+        .d-sm-none{
+            display: none;
+        }
+        .py-2{
+            padding: 1rem 0;
+        }
+    }
 `;

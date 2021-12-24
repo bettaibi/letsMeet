@@ -54,21 +54,5 @@ export const GlobalStyle = createGlobalStyle`
     .m-0{
         margin: 0 !important;
     }
-
-    @media (max-width: 768px) {
-        .flex-sm-column {
-            flex-direction: column;
-            gap:1rem;
-        }
-        .flex-sm-column-reverse {
-            flex-direction: column-reverse;
-        }
-        .flex-sm-row {
-            flex-direction: row;
-        }
-        .d-sm-none{
-            display: none;
-        }
-    }
     
 `;
