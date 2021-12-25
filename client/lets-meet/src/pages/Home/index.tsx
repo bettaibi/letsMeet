@@ -1,8 +1,17 @@
 import React from "react";
 import { Box, Container, Typography, Button, BasicInput } from "../../components/styles";
 import { SubButtonLeft, SubButtonRight } from "../../components/styles/Button.styled";
+import GoogleLogin from 'react-google-login';
+
+
+const CLIENTID = process.env.REACT_APP_CLIENT_ID;
 
 const Home = () => {
+
+    const responseGoogle = (response: any) => {
+        console.log(response);
+    }
+
 
     return (
 
@@ -18,9 +27,19 @@ const Home = () => {
                             </Typography>
                         </Box>
 
-                        <Button color="primary" background="#fff">
-                            Try it free
-                        </Button>
+
+                        <GoogleLogin
+                            clientId={CLIENTID || ''}
+                            buttonText="Login"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            render={renderProps => (
+                                <Button color="primary" onClick={renderProps.onClick} background="#fff">
+                                    Try it free
+                                </Button>
+                            )}
+                        />
+
                     </Box>
 
                     <Box zIndex={10} className="flex-sm-column" display="flex" direction="row" alignItems="center" justifyContent="space-between" gap="2rem">
@@ -34,7 +53,7 @@ const Home = () => {
                             </Typography>
 
                             <Box display="flex" direction="column" mt={2} gap="1rem" justifyContent="center" alignItems="center">
-                                <BasicInput type="text" placeholder="Enter a code link" style={{width:'100%'}} />
+                                <BasicInput required type="text" placeholder="Enter a code link" style={{ width: '100%' }} />
                                 <Box display="flex" direction="row" justifyContent="center" alignItems="center">
                                     <SubButtonLeft color="muted" background="#fff">
                                         Get a link
@@ -53,11 +72,11 @@ const Home = () => {
 
                 </Container>
 
-                <Box position="absolute" bottom="-15px" width="100%" zIndex={1} className="d-sm-none">
+                <Box position="absolute" bottom="-15px" width="100%" className="d-sm-none">
                     <img src="./images/wave.svg" alt="waves" width="100%" />
                 </Box>
 
-                <Box position="absolute" right="20px" bottom="16px" >
+                <Box position="absolute" right="20px" bottom="8px" >
                     <Typography as="small" color="muted">
                         &copy;2021, Created by Nidhal Bettaibi
                     </Typography>
