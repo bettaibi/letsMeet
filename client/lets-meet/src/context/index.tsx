@@ -1,12 +1,7 @@
 import React, { createContext, useContext, useState} from 'react';
+import { UserProps } from '../models/app.model';
 
 
-interface UserProps{
-    email: string;
-    name: string;
-    imageUrl: string;
-    isLoggedIn: boolean;
-}
 interface ContextProps{
     user: UserProps;
     updateUserDetails: (payload: UserProps) => void;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-type displayProps = 'block' | 'inline' | 'inline-block' | 'flex';
+type displayProps = 'block' | 'inline' | 'inline-block' | 'flex' | 'none';
 type directionProps = 'column' | 'row' | 'row-reverse' | 'row-reverse';
 type JustifyContentProps = 'flex-start' | 'flex-end' | 'space-around' | 'center' | 'space-between';
 type alignItemsProps = 'flex-start' | 'flex-end' | 'space-around' | 'center' | 'space-between' | 'stretch';
