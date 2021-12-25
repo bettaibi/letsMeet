@@ -1,17 +1,12 @@
 import React from "react";
-import { Box, Container, Typography, Button, BasicInput } from "../../components/styles";
+import Auth from "../../components/Auth";
+import { Box, Container, Typography, BasicInput } from "../../components/styles";
 import { SubButtonLeft, SubButtonRight } from "../../components/styles/Button.styled";
-import GoogleLogin from 'react-google-login';
 
 
-const CLIENTID = process.env.REACT_APP_CLIENT_ID;
+
 
 const Home = () => {
-
-    const responseGoogle = (response: any) => {
-        console.log(response);
-    }
-
 
     return (
 
@@ -21,24 +16,13 @@ const Home = () => {
                 <Container>
                     <Box zIndex={10} className="flex-sm-column py-1" py={3} display="flex" direction="row" alignItems="center" justifyContent="space-between">
                         <Box display="flex" gap="0.5rem" direction="row" alignItems="center" justifyContent="space-between">
-                            <img src="./images/logo48.svg" alt="logo" />
+                            <img src="./logo40.png" alt="logo" />
                             <Typography className="m-0" as="h2" color="primary">
                                 <strong>Lets</strong><strong style={{ color: "#fd998f" }}>Meet</strong>
                             </Typography>
                         </Box>
 
-
-                        <GoogleLogin
-                            clientId={CLIENTID || ''}
-                            buttonText="Login"
-                            onSuccess={responseGoogle}
-                            onFailure={responseGoogle}
-                            render={renderProps => (
-                                <Button color="primary" onClick={renderProps.onClick} background="#fff">
-                                    Try it free
-                                </Button>
-                            )}
-                        />
+                        <Auth />
 
                     </Box>
 
