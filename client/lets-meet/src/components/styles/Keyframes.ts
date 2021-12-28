@@ -9,6 +9,17 @@ export const slideInRight = keyframes`
     }
 `;
 
+export const slideInUp = keyframes`
+    from{
+        transform: translate(0, 30px);
+        opacity:0;
+    }
+    to{ 
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+`;
+
 export const slideOutRight = keyframes`
     0%{
         transform: translate(0, 0);

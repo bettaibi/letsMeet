@@ -13,8 +13,8 @@ function App() {
   return (
     <ContextProvider>
       <Suspense fallback={<span>Loading...</span>}>
-       <Home />
-
+       {/* <Home /> */}
+      <Room />
       </Suspense>
     </ContextProvider>
   );

@@ -3,7 +3,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { useAppContext } from '../../context';
 import { UserProps } from '../../models/app.model';
 import { Box, Button, Typography } from '../styles';
-
+import { Dropdown } from '../styles/Dropdown.styled';
 
 const CLIENTID = process.env.REACT_APP_CLIENT_ID;
 
@@ -90,7 +90,7 @@ export const UserDetails = ({ user, updateUserDetails }: { user: UserProps, upda
                 </Typography>
 
                 {/* Dropdown menu */}
-                <Box shadow="md" zIndex={999} position="absolute" bottom="-222px" left="0" p={1.5} pt={3} radius="25px" width="200px"
+                <Dropdown shadow="md" zIndex={999} position="absolute" bottom="-222px" left="0" p={1.5} pt={3} radius="25px" width="200px"
                     background='#fff' display={isOpen ? 'flex' : 'none'} direction="column" alignItems='center' justifyContent="center" gap="0.5rem"
                     onClick={e => e.stopPropagation()} className="dropContent">
 
@@ -121,7 +121,7 @@ export const UserDetails = ({ user, updateUserDetails }: { user: UserProps, upda
                     >
                     </GoogleLogout>
 
-                </Box>
+                </Dropdown>
 
             </Box>
         </React.Fragment>

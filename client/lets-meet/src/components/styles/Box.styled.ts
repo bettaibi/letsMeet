@@ -114,5 +114,8 @@ export const Box = styled.div<BoxProps>`
         .py-2{
             padding: 1rem 0;
         }
+        .text-center{
+            text-align: center;
+        }
     }
 `;

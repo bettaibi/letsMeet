@@ -4,8 +4,6 @@ import { Box, Container, Typography, BasicInput } from "../../components/styles"
 import { SubButtonLeft, SubButtonRight } from "../../components/styles/Button.styled";
 
 
-
-
 const Home = () => {
 
     return (
@@ -26,7 +24,7 @@ const Home = () => {
 
                     </Box>
 
-                    <Box zIndex={10} className="flex-sm-column" display="flex" direction="row" alignItems="center" justifyContent="space-between" gap="2rem">
+                    <Box zIndex={10} className="flex-sm-column text-center" display="flex" direction="row" alignItems="center" justifyContent="space-between" gap="2rem">
                         <Box flex={1}>
                             <Typography as="h3" color="primary">
                                 Get a link that you can share
@@ -38,7 +36,7 @@ const Home = () => {
 
                             <Box display="flex" direction="column" mt={2} gap="1rem" justifyContent="center" alignItems="center">
                                 <BasicInput required type="text" placeholder="Enter a code link" style={{ width: '100%' }} />
-                                <Box display="flex" direction="row" justifyContent="center" alignItems="center">
+                                <Box display="flex" direction="row" justifyContent="center" alignItems="center" mt={0.5}>
                                     <SubButtonLeft color="muted" background="#fff">
                                         Get a link
                                     </SubButtonLeft>
