@@ -1,6 +1,6 @@
 import React, {lazy, Suspense} from 'react';
 import { Container, Box, Typography, Hidden } from './components/styles';
-import { BrowserRouter, HashRouter, Route,  Routes} from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route,  Routes } from 'react-router-dom';
 import { ContextProvider } from './context';
 
 
@@ -14,7 +14,7 @@ function App() {
     <ContextProvider>
       <Suspense fallback={<span>Loading...</span>}>
        {/* <Home /> */}
-      <Room />
+       <Room />
       </Suspense>
     </ContextProvider>
   );

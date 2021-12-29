@@ -4,6 +4,10 @@ interface ButtonProps{
     color: string;
     background: string;
 }
+interface RoundedButtonProps{
+    width: string;
+    height: string;
+}
 
 export const Button = styled.button<ButtonProps>`
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
@@ -40,4 +44,12 @@ export const SubButtonLeft = styled(Button)`
 export const SubButtonRight = styled(Button)`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+`;
+
+export const RoundedButton = styled(Button)<RoundedButtonProps>`
+    width:  ${({width})=> width || '40px'} !important;
+    height:  ${({height})=> height || '40px'} !important;
+    display: flex !important;
+    justify-content:center;
+    align-items: center;
 `;
