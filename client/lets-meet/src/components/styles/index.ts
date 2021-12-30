@@ -5,6 +5,7 @@ import { Hidden } from './Hidden.styled';
 import { Button, RoundedButton } from './Button.styled';
 import { Modal, Overlay } from './Modal.styled';
 import { BasicInput } from './Input.styled';
+import { Grid, GridItem } from './Grid.styled';
 
 export {
     Container,
@@ -16,4 +17,6 @@ export {
     Overlay,
     BasicInput,
     RoundedButton,
+    Grid,
+    GridItem
 }
