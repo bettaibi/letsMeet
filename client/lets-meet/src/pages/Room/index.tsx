@@ -1,26 +1,78 @@
+import { useEffect, useRef, useState } from "react";
 import MoreOptions from "../../components/MoreOptions";
-import { Box, Container, Grid, RoundedButton, GridItem } from "../../components/styles";
+import { Box, Container, RoundedButton, VideoContainer, Video } from "../../components/styles";
+import VideoWrapper from "../../components/VideoWrapper";
 
 
 const Room = () => {
+    const [stream, setStream] =  useState<any>(null);
+    const myVideoRefStream = useRef<HTMLVideoElement>(null);
 
+     useEffect(() => {
+        loadMedia();
+
+        return () => {
+            try {
+                if (stream) {
+                    const tracks = stream.getTracks();
+                    tracks.forEach(function (track: any) {
+                        track.stop();
+                    });
+
+                    // if (myPeer) {
+                    //     myPeer.destroy();
+                    // }
+                }
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+    }, []);
+
+    function loadMedia() {
+        navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+        }).then(gotMedia).catch((err) => { console.error(err) });
+    }
+
+    async function gotMedia(st: MediaStream) {
+        try{
+            if (myVideoRefStream.current) {
+                if ("srcObject" in myVideoRefStream.current) {
+                    myVideoRefStream.current.srcObject = st;
+                } else {
+                    // Avoid using this in new browsers, as it is going away.
+                    // @ts-ignore
+                    myVideoRefStream.current.src = window.URL.createObjectURL(st);
+                }
+                myVideoRefStream.current.onloadedmetadata = function (e) {
+                    myVideoRefStream.current?.play();
+                };
+            }
+            // stream = st;
+            setStream(st)
+            console.log(stream);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+     
     return(
         <Box background="primary" height="100vh">
-                <Box display="flex" direction="column" justifyContent="space-between" height="100%" >
-                    <Grid gap="0.5rem" radius="4px">
-                        <GridItem background="secondary" active={true}>Box 1</GridItem>
-                        <GridItem background="accent">Box 1</GridItem>
-                        <GridItem background="#fff">Box 2</GridItem>
-                        <GridItem background="#fff">Box 3</GridItem>
-                        <GridItem background="#fff">Box 4</GridItem>
-                        <GridItem background="#fff">Box 5</GridItem>
-                        <GridItem background="#fff">Box 6</GridItem>
-                        <GridItem background="#fff">Box 6</GridItem>
-                        <GridItem background="#fff">Box 6</GridItem>
-                        <GridItem background="#fff">Box 6</GridItem>
-                        <GridItem background="#fff">Box 6</GridItem>
-                        <GridItem background="#fff">Box 6</GridItem>
-                    </Grid>
+                <Box display="flex" direction="column" justifyContent="space-between" height="100%">
+                    <Container style={{flex: '1' , position: "relative", height: 'calc(100vh - 55px)'}}>
+                     
+                     <VideoWrapper streams = {[stream, stream]} />
+                 
+                    <VideoContainer width="100%" height="calc(100% - 160px)" background="secondary" active={true} radius="4px">
+                      <Video ref={myVideoRefStream} muted autoPlay />
+                    </VideoContainer>
+                    
+                    </Container>
 
                     <Box height="55px" display="flex" direction="row" justifyContent="center" alignItems="center" gap="0.3rem">
                          <RoundedButton background="#fff" color="primary" width="35px" height="35px">

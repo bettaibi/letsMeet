@@ -16,20 +16,17 @@ export const Grid = styled.div<GridProps>`
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     grid-template-rows: repeat(auto-fit, minmax(140px, 1fr));
     
-
     width: 100%;
     height: calc(100vh - 55px);
     overflow: auto;
-    padding: 1rem 1rem 0 1rem;
+    padding: 1rem 0 0 0;
     ${({gap}) => gap && 'gap: '+ gap+';'}
 
     div{
         ${({radius})=> radius && 'border-radius: '+radius+';'}
     }
 
- 
 `;
-
 
 export const GridItem = styled.div<GridItemProps>`
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);

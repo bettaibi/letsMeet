@@ -1,10 +1,9 @@
 import React from 'react';
-import useModal from '../../hooks/useModal';
-import { Box, Modal, RoundedButton } from '../styles';
-import { Dropdown } from '../styles/Dropdown.styled';
+import useSidenav from '../../hooks/useSidenav';
+import { Box, RoundedButton } from '../styles';
 
 const MoreOptions = () => {
-   const { ModalComponent, handleOpen, handleClose} = useModal();
+   const { SidenavComponent, handleOpen, handleClose} = useSidenav();
 
    
     return (
@@ -13,9 +12,9 @@ const MoreOptions = () => {
                     <img src="./images/icons/more.svg" alt="mic" />
             </RoundedButton>
 
-            <ModalComponent>
+            <SidenavComponent>
                 lorem ipsum dolor sit amet
-            </ModalComponent>
+            </SidenavComponent>
         </React.Fragment>
     )
 }

@@ -53,3 +53,15 @@ export const RoundedButton = styled(Button)<RoundedButtonProps>`
     justify-content:center;
     align-items: center;
 `;
+
+export const ActionButton = styled(Button)`
+    width:  45px !important;
+    height:  45px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    display: flex !important;
+    justify-content:center;
+    align-items: center;
+    transform: scale(0);
+`;

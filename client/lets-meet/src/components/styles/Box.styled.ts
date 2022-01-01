@@ -97,6 +97,14 @@ export const Box = styled.div<BoxProps>`
     ${({right})=> right && 'right: '+right+';'}
     ${({zIndex})=> zIndex && 'z-index: '+zIndex+';'}
 
+    &.scrolling-wrapper {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
 
     /* Media */
     @media (max-width: 768px) {
