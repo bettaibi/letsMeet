@@ -9,7 +9,7 @@ const MoreOptions = () => {
     return (
         <React.Fragment>
             <RoundedButton background="#fff" color="primary" width="35px" height="35px" onClick={handleOpen}>
-                    <img src="./images/icons/more.svg" alt="mic" />
+                    <img src="/images/icons/more.svg" alt="mic" />
             </RoundedButton>
 
             <SidenavComponent>

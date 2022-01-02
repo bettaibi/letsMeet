@@ -9,6 +9,7 @@ import { Grid, GridItem } from './Grid.styled';
 import { VideoContainer } from './VideoContainer.styled';
 import { Sidenav } from './Sidenav.styled';
 import { Video } from './Video.styled';
+import {Snackbar} from './Snackbar.styled';
 
 export {
     Container,
@@ -25,5 +26,6 @@ export {
     VideoContainer,
     ActionButton,
     Sidenav,
-    Video
+    Video,
+    Snackbar
 }

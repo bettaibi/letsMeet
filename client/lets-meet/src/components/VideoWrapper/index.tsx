@@ -57,12 +57,12 @@ const VideoWrapper: React.FC<VideoWrapperProps> = ({streams}) => {
 
           <ActionButton ref={rightBtnRef} background="#fff" color="primary" onClick={scrolToRight}
           style={{position: "absolute", top:'50px', right:'5px'}}>
-                <img src="./images/icons/navigate_next.svg" alt="mic" />
+                <img src="/images/icons/navigate_next.svg" alt="mic" />
           </ActionButton>
 
           <ActionButton ref={leftBtnRef} background="#fff" color="primary" onClick={scrolToLeft}
           style={{position: "absolute", top:'50px', left:'5px'}}>
-                <img src="./images/icons/chevron_left.svg" alt="mic" />
+                <img src="/images/icons/chevron_left.svg" alt="mic" />
           </ActionButton>
         </Box>
     )

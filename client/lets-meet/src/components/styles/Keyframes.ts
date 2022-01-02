@@ -11,11 +11,22 @@ export const slideInRight = keyframes`
 
 export const slideInUp = keyframes`
     from{
-        transform: translate(0, 30px);
+        transform: translate(0, 80px);
         opacity:0;
     }
     to{ 
         transform: translate(0, 0);
+        opacity: 1;
+    }
+`;
+
+export const SacleIn = keyframes`
+    from{
+        transform: scale(0);
+        opacity:0;
+    }
+    to{ 
+        transform: scale(1);
         opacity: 1;
     }
 `;

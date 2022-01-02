@@ -2,7 +2,9 @@ import React from "react";
 import Auth from "../../components/Auth";
 import { Box, Container, Typography, BasicInput } from "../../components/styles";
 import { SubButtonLeft, SubButtonRight } from "../../components/styles/Button.styled";
-
+import { v4, validate } from 'uuid';
+import { useNavigate } from 'react-router-dom';
+import { useAppContext } from "../../context";
 
 const Home = () => {
 
@@ -34,18 +36,7 @@ const Home = () => {
                                 Click on the button below to get a link that you can send to people that you want to meet with.
                             </Typography>
 
-                            <Box display="flex" direction="column" mt={2} gap="1rem" justifyContent="center" alignItems="center">
-                                <BasicInput required type="text" placeholder="Enter a code link" style={{ width: '100%' }} />
-                                <Box display="flex" direction="row" justifyContent="center" alignItems="center" mt={0.5}>
-                                    <SubButtonLeft color="muted" background="#fff">
-                                        Get a link
-                                    </SubButtonLeft>
-                                    <SubButtonRight color="#fff" background="secondary">
-                                        Join
-                                    </SubButtonRight>
-                                </Box>
-
-                            </Box>
+                            <InputController />
                         </Box>
                         <Box width="375px" mt={3} className="d-sm-none">
                             <img src="./images/illustration-mockups.svg" width="100%" height="100%" />
@@ -68,6 +59,52 @@ const Home = () => {
 
         </main>
 
+    )
+};
+
+const InputController = () => {
+    const [value, setValue] = React.useState<string>('');
+    const navigate = useNavigate();
+    const { user, showMsg } = useAppContext();
+
+    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value);
+    }
+
+    function getCode(){
+        setValue(v4());
+    }
+
+    function joinRoom(){
+       if(user.hasOwnProperty('name')){
+           if(validate(value)){
+             navigate(`/room/${value}`);
+           }
+           else{
+               // Code is not Valid
+               showMsg("couldn't find the meeting that you are trying to join");
+           }
+       }
+       else{
+           // User is not authenticated
+           showMsg('User is not authenticated, you might not be signed in with the correct account.');
+       }
+
+    }
+
+    return (
+        <Box display="flex" direction="column" mt={2} gap="1rem" justifyContent="center" alignItems="center">
+            <BasicInput value={value} required type="text" onChange={changeHandler}
+            placeholder="Enter a code link" style={{ width: '100%' }} />
+            <Box display="flex" direction="row" justifyContent="center" alignItems="center" mt={0.5}>
+                <SubButtonLeft color="muted" background="#fff" onClick={getCode}>
+                    Get a link
+                </SubButtonLeft>
+                <SubButtonRight color="#fff" background="secondary" disabled={!value} onClick={joinRoom}>
+                    Join
+                </SubButtonRight>
+            </Box>
+        </Box>
     )
 };
 

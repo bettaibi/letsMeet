@@ -9,7 +9,7 @@ const Room = () => {
     const myVideoRefStream = useRef<HTMLVideoElement>(null);
 
      useEffect(() => {
-        loadMedia();
+        // loadMedia();
 
         return () => {
             try {
@@ -76,14 +76,14 @@ const Room = () => {
 
                     <Box height="55px" display="flex" direction="row" justifyContent="center" alignItems="center" gap="0.3rem">
                          <RoundedButton background="#fff" color="primary" width="35px" height="35px">
-                             <img src="./images/icons/mic.svg" alt="mic" />
+                             <img src="/images/icons/mic.svg" alt="mic" />
                          </RoundedButton>
                          <RoundedButton background="#fff" color="primary" width="35px" height="35px">
-                             <img src="./images/icons/videocam.svg" alt="mic" />
+                             <img src="/images/icons/videocam.svg" alt="mic" />
                          </RoundedButton>
                          <MoreOptions /> 
                          <RoundedButton background="#dd4b39" color="#fff" width="35px" height="35px">
-                             <img src="./images/icons/call_end.svg" alt="mic" />
+                             <img src="/images/icons/call_end.svg" alt="mic" />
                          </RoundedButton>
                     </Box>
                 </Box>

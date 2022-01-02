@@ -118,8 +118,7 @@ export const UserDetails = ({ user, updateUserDetails }: { user: UserProps, upda
                                 <span>Sign out</span>
                             </Button>
                         )}
-                    >
-                    </GoogleLogout>
+                    />
 
                 </Dropdown>
 
