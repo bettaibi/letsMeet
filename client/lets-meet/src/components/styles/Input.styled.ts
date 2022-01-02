@@ -6,6 +6,7 @@ export const BasicInput = styled.input`
     padding: 0.375rem 1rem;
     border: 1px solid transparent;
     outline: none;
+    color: ${({theme})=> theme.colors.primary};
     font-weight: 500;
     white-space: nowrap;
     font-size: 1rem;

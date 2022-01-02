@@ -1,15 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import MoreOptions from "../../components/MoreOptions";
 import { Box, Container, RoundedButton, VideoContainer, Video } from "../../components/styles";
 import VideoWrapper from "../../components/VideoWrapper";
+import { useParams } from "react-router-dom";
+import { validate } from 'uuid';
 
-
-const Room = () => {
+const Room = React.memo(() => {
     const [stream, setStream] =  useState<any>(null);
     const myVideoRefStream = useRef<HTMLVideoElement>(null);
+    let params = useParams();
 
-     useEffect(() => {
-        // loadMedia();
+    useLayoutEffect(() => {
+        //  loadMedia();
 
         return () => {
             try {
@@ -53,14 +55,22 @@ const Room = () => {
             }
             // stream = st;
             setStream(st)
-            console.log(stream);
         }
         catch (err) {
             throw err;
         }
     }
 
-     
+    if(params && !validate(params.roomId || '')){
+        return (
+            <Box p={3}>
+                <p>
+                    This room meeting is not exist!
+                </p>
+            </Box>
+        );
+    }
+
     return(
         <Box background="primary" height="100vh">
                 <Box display="flex" direction="column" justifyContent="space-between" height="100%">
@@ -89,6 +99,6 @@ const Room = () => {
                 </Box>
         </Box>
     )
-};
+});
 
 export default Room;

@@ -6,7 +6,7 @@ import { v4, validate } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from "../../context";
 
-const Home = () => {
+const Home = React.memo(() => {
 
     return (
 
@@ -60,7 +60,7 @@ const Home = () => {
         </main>
 
     )
-};
+});
 
 const InputController = () => {
     const [value, setValue] = React.useState<string>('');
