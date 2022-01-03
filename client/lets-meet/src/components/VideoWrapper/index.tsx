@@ -1,12 +1,12 @@
 import React, {useRef, useLayoutEffect} from 'react';
-import { ActionButton, Box, VideoContainer, Video } from '../styles';
+import { ActionButton, Box } from '../styles';
+import VideoStreamers from '../VideoStreamers';
 
 interface VideoWrapperProps{
-    streams: any[];
+   
 }
 
-const VideoWrapper: React.FC<VideoWrapperProps> = ({streams}) => {
-
+const VideoWrapper: React.FC<VideoWrapperProps> = () => {
     const boxRef = useRef<HTMLDivElement>(null);
     const rightBtnRef = useRef<HTMLButtonElement>(null);
     const leftBtnRef = useRef<HTMLButtonElement>(null);
@@ -40,20 +40,13 @@ const VideoWrapper: React.FC<VideoWrapperProps> = ({streams}) => {
             boxRef.current.scrollLeft -= 240;
         }
     }
-    
-    function onMountVidio(e: any){
-        console.log("video loaded")
-    }
 
 
     return (
         <Box ref={boxRef} py={2} display="flex" direction="row" justifyContent="flex-start" alignItems="center" gap="0.5rem" 
           style={{overflowX: 'auto', overflowY: 'hidden'}} wrap="no-wrap" width="100%" className="scrolling-wrapper">
-          <VideoContainer width="120px" height="120px" background="secondary" active={true} radius="4px">
-              <Video muted autoPlay />
-          </VideoContainer>
-          <VideoContainer width="120px" height="120px" background="accent" radius="4px">Box 1</VideoContainer>
-          
+        
+          <VideoStreamers />
 
           <ActionButton ref={rightBtnRef} background="#fff" color="primary" onClick={scrolToRight}
           style={{position: "absolute", top:'50px', right:'5px'}}>

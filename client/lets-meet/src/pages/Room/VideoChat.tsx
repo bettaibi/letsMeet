@@ -2,11 +2,11 @@ import React, { useLayoutEffect, useEffect, useRef, useState } from "react";
 import MoreOptions from "../../components/MoreOptions";
 import { Box, Container, RoundedButton, VideoContainer, Video } from "../../components/styles";
 import VideoWrapper from "../../components/VideoWrapper";
-
+import Peer from "simple-peer";
 
 const VideoChat = React.memo(() => {
     let stream: any;
-    // let myPeer: Peer.Instance;
+    let myPeer: Peer.Instance;
     const myVideoRefStream = useRef<HTMLVideoElement>(null);
 
     useLayoutEffect(() => {
@@ -20,9 +20,9 @@ const VideoChat = React.memo(() => {
                         track.stop();
                     });
 
-                    // if (myPeer) {
-                    //     myPeer.destroy();
-                    // }
+                    if (myPeer) {
+                        myPeer.destroy();
+                    }
                 }
             }
             catch (err) {
@@ -64,7 +64,7 @@ const VideoChat = React.memo(() => {
             <Box display="flex" direction="column" justifyContent="space-between" height="100%">
                 <Container style={{ flex: '1', position: "relative", height: 'calc(100vh - 55px)' }}>
 
-                    <VideoWrapper streams={[stream, stream]} />
+                    <VideoWrapper/>
 
                     <VideoContainer width="100%" height="calc(100% - 160px)" background="secondary" active={true} radius="4px">
                         <Video ref={myVideoRefStream} muted autoPlay />
