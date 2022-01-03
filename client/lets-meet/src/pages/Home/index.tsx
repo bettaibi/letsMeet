@@ -5,6 +5,8 @@ import { SubButtonLeft, SubButtonRight } from "../../components/styles/Button.st
 import { v4, validate } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from "../../context";
+import { useNotificationContext } from "../../context/NotificationContext";
+import { useSocketContext } from "../../context/SocketContext";
 
 const Home = React.memo(() => {
 
@@ -29,11 +31,11 @@ const Home = React.memo(() => {
                     <Box zIndex={10} className="flex-sm-column text-center" display="flex" direction="row" alignItems="center" justifyContent="space-between" gap="2rem">
                         <Box flex={1}>
                             <Typography as="h3" color="primary">
-                                Get a link that you can share
+                                Get a code that you can share
                             </Typography>
                             <Typography as="p" color="muted">
                                 We re-engineered the service that we built for secure business meetings, Lets Meet makes it free and available for all. <br />
-                                Click on the button below to get a link that you can send to people that you want to meet with.
+                                Click on the button below to get a link code that you can send to people that you want to meet with.
                             </Typography>
 
                             <InputController />
@@ -65,7 +67,9 @@ const Home = React.memo(() => {
 const InputController = () => {
     const [value, setValue] = React.useState<string>('');
     const navigate = useNavigate();
-    const { user, showMsg } = useAppContext();
+    const { user } = useAppContext();
+    const { showMsg } = useNotificationContext();
+    const { socket } = useSocketContext();
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
@@ -78,7 +82,11 @@ const InputController = () => {
     function joinRoom(){
        if(user.hasOwnProperty('name')){
            if(validate(value)){
-             navigate(`/room/${value}`);
+             socket.emit('joinRoom', value);
+
+             setTimeout(() =>{
+                navigate(`/room/${value}`);
+             },1000);
            }
            else{
                // Code is not Valid
@@ -95,7 +103,7 @@ const InputController = () => {
     return (
         <Box display="flex" direction="column" mt={2} gap="1rem" justifyContent="center" alignItems="center">
             <BasicInput value={value} required type="text" onChange={changeHandler}
-            placeholder="Enter a code link" style={{ width: '100%' }} />
+            placeholder="Enter a code" style={{ width: '100%' }} />
             <Box display="flex" direction="row" justifyContent="center" alignItems="center" mt={0.5}>
                 <SubButtonLeft color="muted" background="#fff" onClick={getCode}>
                     Get a link
