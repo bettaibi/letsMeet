@@ -3,6 +3,7 @@ import { fadeIn, slideInRight, slideOutRight } from "./Keyframes";
 
 interface ModalProps{
     show: boolean;
+    background?: string;
 }
 
 export const Modal = styled.div<ModalProps>`
@@ -17,17 +18,17 @@ export const Modal = styled.div<ModalProps>`
 `;
 
 export const Overlay = styled.div<ModalProps>`
-     display: ${({show}) => show ? 'flex' : 'none'};
+      display: ${({show}) => show ? 'flex' : 'none'};
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0,0,0,0.1);
+      background-color: ${({background}) => background ||'rgba(0,0,0,0.1)'};
       z-index: 99;
       align-items: center;
       justify-content: center;
-      animation: ${fadeIn} 0.2s ease-in-out forwards;
+      animation: ${fadeIn} 0.5s ease-in forwards;
 `;
 
 Modal.defaultProps = {

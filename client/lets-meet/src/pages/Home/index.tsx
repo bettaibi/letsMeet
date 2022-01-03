@@ -6,7 +6,6 @@ import { v4, validate } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from "../../context";
 import { useNotificationContext } from "../../context/NotificationContext";
-import { useSocketContext } from "../../context/SocketContext";
 
 const Home = React.memo(() => {
 
@@ -69,7 +68,6 @@ const InputController = () => {
     const navigate = useNavigate();
     const { user } = useAppContext();
     const { showMsg } = useNotificationContext();
-    const { socket } = useSocketContext();
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
@@ -82,11 +80,7 @@ const InputController = () => {
     function joinRoom(){
        if(user.hasOwnProperty('name')){
            if(validate(value)){
-             socket.emit('joinRoom', value);
-
-             setTimeout(() =>{
-                navigate(`/room/${value}`);
-             },1000);
+             navigate(`/room/${value}`);
            }
            else{
                // Code is not Valid
