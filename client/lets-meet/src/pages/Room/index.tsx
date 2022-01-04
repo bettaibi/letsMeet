@@ -3,7 +3,6 @@ import { Box, Overlay, Typography} from "../../components/styles";
 import { useParams } from "react-router-dom";
 import { validate } from 'uuid';
 import { useSocketContext } from "../../context/SocketContext";
-import useToggle from "../../hooks/useToggle";
 import VideoChat from "./VideoChat";
 
 const Room = React.memo(() => {
@@ -11,6 +10,7 @@ const Room = React.memo(() => {
     const {socket} = useSocketContext();
     const [show, setShow] = useState<boolean>(true);
     var timer: NodeJS.Timeout;
+
     useEffect(()=> {
         socket.once('onRoomJoined', ({isJoined}: {isJoined: boolean})=> {
             if(isJoined) {
@@ -56,7 +56,7 @@ const Room = React.memo(() => {
 
     return (
        <React.Fragment>
-           <VideoChat />
+           <VideoChat roomId={roomId || ''} />
        </React.Fragment> 
     )
 });

@@ -3,10 +3,10 @@ import { ActionButton, Box } from '../styles';
 import VideoStreamers from '../VideoStreamers';
 
 interface VideoWrapperProps{
-   
+   st: MediaStream;
 }
 
-const VideoWrapper: React.FC<VideoWrapperProps> = () => {
+const VideoWrapper: React.FC<VideoWrapperProps> = ({st}) => {
     const boxRef = useRef<HTMLDivElement>(null);
     const rightBtnRef = useRef<HTMLButtonElement>(null);
     const leftBtnRef = useRef<HTMLButtonElement>(null);
@@ -46,7 +46,7 @@ const VideoWrapper: React.FC<VideoWrapperProps> = () => {
         <Box ref={boxRef} py={2} display="flex" direction="row" justifyContent="flex-start" alignItems="center" gap="0.5rem" 
           style={{overflowX: 'auto', overflowY: 'hidden'}} wrap="no-wrap" width="100%" className="scrolling-wrapper">
         
-          <VideoStreamers />
+          <VideoStreamers st = {st} />
 
           <ActionButton ref={rightBtnRef} background="#fff" color="primary" onClick={scrolToRight}
           style={{position: "absolute", top:'50px', right:'5px'}}>

@@ -29,8 +29,8 @@ export class MeetGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
         this.logger.log('**Socket Initialized**');
     }
 
-    private addNewMemberToRoom(payload: UserModel, roomId: string):UserModel[]{
-        return [...this.users[roomId], payload];
+    private addNewMemberToRoom(payload: UserModel, roomId: string, socketId: string):UserModel[]{
+        return [...this.users[roomId], {...payload, socketId}];
     }
 
     private deleteMemberFromRoom(socketId: string, roomId: string):UserModel[]{
@@ -61,7 +61,7 @@ export class MeetGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 
     @SubscribeMessage('dataSignal')
     private getSignal(client: Socket, roomId: string, payload: UserModel): void{
-        this.users[roomId] = this.addNewMemberToRoom(payload, roomId);
+        this.users[roomId] = this.addNewMemberToRoom(payload, roomId, client.id);
         this.server.to(roomId).emit('roomMembers', [...this.users[roomId]]);
     }
 

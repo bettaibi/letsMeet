@@ -1,16 +1,17 @@
-import React, { useLayoutEffect, useEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import MoreOptions from "../../components/MoreOptions";
 import { Box, Container, RoundedButton, VideoContainer, Video } from "../../components/styles";
 import VideoWrapper from "../../components/VideoWrapper";
-import Peer from "simple-peer";
 
-const VideoChat = React.memo(() => {
-    let stream: any;
-    let myPeer: Peer.Instance;
+import { useSocketContext } from "../../context/SocketContext";
+
+
+const VideoChat = React.memo(({ roomId }: { roomId: string }) => {
+    const [stream, setStream] = useState<any>();
     const myVideoRefStream = useRef<HTMLVideoElement>(null);
 
     useLayoutEffect(() => {
-        //  loadMedia();
+        loadMedia();
 
         return () => {
             try {
@@ -19,10 +20,6 @@ const VideoChat = React.memo(() => {
                     tracks.forEach(function (track: any) {
                         track.stop();
                     });
-
-                    if (myPeer) {
-                        myPeer.destroy();
-                    }
                 }
             }
             catch (err) {
@@ -51,8 +48,9 @@ const VideoChat = React.memo(() => {
                 myVideoRefStream.current.onloadedmetadata = function (e) {
                     myVideoRefStream.current?.play();
                 };
+
+                setStream(st);
             }
-            stream = st;
         }
         catch (err) {
             throw err;
@@ -64,7 +62,8 @@ const VideoChat = React.memo(() => {
             <Box display="flex" direction="column" justifyContent="space-between" height="100%">
                 <Container style={{ flex: '1', position: "relative", height: 'calc(100vh - 55px)' }}>
 
-                    <VideoWrapper/>
+                    {stream && <VideoWrapper st={stream} />}
+                    {!stream && <VideoContainer width="120px" height="120px" />}
 
                     <VideoContainer width="100%" height="calc(100% - 160px)" background="secondary" active={true} radius="4px">
                         <Video ref={myVideoRefStream} muted autoPlay />
