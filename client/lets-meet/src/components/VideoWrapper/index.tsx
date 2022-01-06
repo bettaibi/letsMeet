@@ -4,9 +4,10 @@ import VideoStreamers from '../VideoStreamers';
 
 interface VideoWrapperProps{
    st: MediaStream;
+   roomId: string;
 }
 
-const VideoWrapper: React.FC<VideoWrapperProps> = ({st}) => {
+const VideoWrapper: React.FC<VideoWrapperProps> = ({st, roomId}) => {
     const boxRef = useRef<HTMLDivElement>(null);
     const rightBtnRef = useRef<HTMLButtonElement>(null);
     const leftBtnRef = useRef<HTMLButtonElement>(null);
@@ -46,7 +47,7 @@ const VideoWrapper: React.FC<VideoWrapperProps> = ({st}) => {
         <Box ref={boxRef} py={2} display="flex" direction="row" justifyContent="flex-start" alignItems="center" gap="0.5rem" 
           style={{overflowX: 'auto', overflowY: 'hidden'}} wrap="no-wrap" width="100%" className="scrolling-wrapper">
         
-          <VideoStreamers st = {st} />
+          <VideoStreamers st = {st} roomId = {roomId} />
 
           <ActionButton ref={rightBtnRef} background="#fff" color="primary" onClick={scrolToRight}
           style={{position: "absolute", top:'50px', right:'5px'}}>

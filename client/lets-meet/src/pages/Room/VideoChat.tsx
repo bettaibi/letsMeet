@@ -1,20 +1,22 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState,useEffect } from "react";
 import MoreOptions from "../../components/MoreOptions";
 import { Box, Container, RoundedButton, VideoContainer, Video } from "../../components/styles";
 import VideoWrapper from "../../components/VideoWrapper";
 
 import { useSocketContext } from "../../context/SocketContext";
 
-
+let stream: any;  
 const VideoChat = React.memo(({ roomId }: { roomId: string }) => {
-    const [stream, setStream] = useState<any>();
+    const [isVideoStarted, setIsVideoStarted] = useState<boolean>(false);
     const myVideoRefStream = useRef<HTMLVideoElement>(null);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         loadMedia();
 
         return () => {
             try {
+                console.log("component has been destroyed");
+                console.log(stream)
                 if (stream) {
                     const tracks = stream.getTracks();
                     tracks.forEach(function (track: any) {
@@ -35,7 +37,7 @@ const VideoChat = React.memo(({ roomId }: { roomId: string }) => {
         }).then(gotMedia).catch((err) => { console.error(err) });
     }
 
-    async function gotMedia(st: MediaStream) {
+    function gotMedia(st: MediaStream) {
         try {
             if (myVideoRefStream.current) {
                 if ("srcObject" in myVideoRefStream.current) {
@@ -49,7 +51,9 @@ const VideoChat = React.memo(({ roomId }: { roomId: string }) => {
                     myVideoRefStream.current?.play();
                 };
 
-                setStream(st);
+                stream = st;
+                setIsVideoStarted(true);
+              
             }
         }
         catch (err) {
@@ -57,13 +61,16 @@ const VideoChat = React.memo(({ roomId }: { roomId: string }) => {
         }
     }
 
+
     return (
         <Box background="primary" height="100vh">
             <Box display="flex" direction="column" justifyContent="space-between" height="100%">
                 <Container style={{ flex: '1', position: "relative", height: 'calc(100vh - 55px)' }}>
 
-                    {stream && <VideoWrapper st={stream} />}
-                    {!stream && <VideoContainer width="120px" height="120px" />}
+                    {isVideoStarted && <VideoWrapper st={stream} roomId = {roomId} />}
+                    {!isVideoStarted && <VideoContainer width="120px" height="120px">
+                        <img src="/images/spinner.svg" />    
+                    </VideoContainer>}
 
                     <VideoContainer width="100%" height="calc(100% - 160px)" background="secondary" active={true} radius="4px">
                         <Video ref={myVideoRefStream} muted autoPlay />
