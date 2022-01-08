@@ -29,12 +29,12 @@ export class MeetGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
         this.logger.log('**Socket Initialized**');
     }
 
-    private addNewMemberToRoom(payload: UserModel, roomId: string, socketId: string):UserModel[]{
-        return [...this.users[roomId], {...payload, socketId}];
+    private addNewMemberToRoom(payload: UserModel, roomId: string, socketId: string){
+        this.users[roomId] = [ {...payload, socketId}];
     }
 
-    private deleteMemberFromRoom(socketId: string, roomId: string):UserModel[]{
-        return this.users[roomId].filter((item: UserModel) => {
+    private deleteMemberFromRoom(socketId: string, roomId: string){
+        this.users[roomId] = this.users[roomId].filter((item: UserModel) => {
             return item.socketId !== socketId;
         });
     }
@@ -43,6 +43,7 @@ export class MeetGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
     private joinRoom(client: Socket, roomId: string): void{
         client.join(roomId);
         if(!this.users.hasOwnProperty(roomId)){
+            console.log("*** room registred ***")
             this.users[roomId] = [];
         }
         client.emit('onRoomJoined', {isJoined: true});
@@ -53,7 +54,7 @@ export class MeetGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
     @SubscribeMessage('leaveRoom')
     private leaveRoom(client: Socket, roomId: string): void{
         client.leave(roomId);
-        this.users[roomId] = this.deleteMemberFromRoom(client.id, roomId);
+        this.deleteMemberFromRoom(client.id, roomId);
 
         this.server.to(roomId).emit('roomMembers', [...this.users[roomId]]);
         this.logger.log(`${client.id} has leaved the room ${roomId}`);
@@ -61,7 +62,7 @@ export class MeetGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 
     @SubscribeMessage('dataSignal')
     private getSignal(client: Socket, roomId: string, payload: UserModel): void{
-        this.users[roomId] = this.addNewMemberToRoom(payload, roomId, client.id);
+        this.addNewMemberToRoom(payload, roomId, client.id);
         this.server.to(roomId).emit('roomMembers', [...this.users[roomId]]);
     }
 
@@ -75,7 +76,7 @@ export class MeetGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
         const roomId = this.connectedSockets[client.id];
         client.leave(roomId);
         if(this.users.hasOwnProperty(roomId)){
-            this.users[roomId] = this.deleteMemberFromRoom(client.id, roomId);
+            this.deleteMemberFromRoom(client.id, roomId);
             this.server.to(roomId).emit('roomMembers', [...this.users[roomId]]);
         }
         client.removeAllListeners();

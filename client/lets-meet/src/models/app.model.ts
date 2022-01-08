@@ -1,3 +1,4 @@
+import Peer from "simple-peer";
 
 export interface UserProps{
     email: string;
@@ -11,5 +12,5 @@ export interface UserModel{
     email: string;
     imageUrl: string;
     socketId: string;
-    stream: MediaStream;
+    stream: Peer.SignalData;
 }
